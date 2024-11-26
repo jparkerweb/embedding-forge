@@ -1,0 +1,21 @@
+Some features you might want to consider adding to Embedding Forge:
+
+1. Topic Management:
+- Save/load topics with their associated phrases
+- Allow multiple topics with comparisons between them
+- Version control for topic definitions
+
+2. Validation Tools:
+- Test phrases to verify topic accuracy
+- Visualization of phrase similarities within a topic
+- Cross-topic similarity analysis
+
+3. Export Options:
+- Export topic embeddings in various formats
+- Include metadata about the embedding model used
+- Sample code for using the embeddings in different languages
+
+4. Guidance Features:
+- Suggestions for improving topic coverage
+- Warnings about potentially conflicting phrases
+- Best practices for phrase selection

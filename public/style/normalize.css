@@ -1,0 +1,42 @@
+/*************/
+/* normalize */
+/*************/
+html {
+	height: 100%;
+	font-size: 16px;
+}
+body * {
+	box-sizing: border-box;
+}
+
+/* ------------------------ */
+/* -- Custom scrollbars  -- */
+/* ------------------------ */
+/* -- for WebKit browsers --*/
+/* ------------------------ */
+body::-webkit-scrollbar { width: 12px; }
+body::-webkit-scrollbar-track { background: var(--color-secondary); }
+body::-webkit-scrollbar-thumb {
+	background-color: var(--color-primary);
+	border-radius: 10px;
+	border: 3px solid var(--color-secondary);
+}
+/* ------------------------ */
+/* -- for Firefox        -- */
+/* ------------------------ */
+body {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-primary) var(--color-secondary);
+}
+
+
+/* -------------------- */
+/* -- input controls -- */
+/* -------------------- */
+button[disabled] {
+    pointer-events: none;
+    background: gray;
+    border-color: gray;
+    cursor: not-allowed;
+    color: #bbb;
+}

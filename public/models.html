@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embedding-Forge | Models</title>
+  <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+<!--nav-->
+
+<div class="main-content">
+    <div class="section">
+        <h1 class="flex-row-left color-models">
+            <img class="height-40 margin-right-10" src="img/crystal-model.png">
+            Models
+        </h1>
+        <form id="modelForm" class="form-section">
+            <div class="flex-row">
+                <div class="margin-right-20">
+                    <label for="modelName">Model Name</label>
+                    <input type="text" id="modelName" name="model" />
+                </div>
+                <div class="margin-right-20">
+                    <label for="huggingfaceName">Huggingface Full Name</label>
+                    <input type="text" id="huggingfaceName" name="huggingface" />
+                </div>
+                <div>
+                    <label for="quantized">Quantized?</label>
+                    <select id="quantized" name="quantized">
+                        <option value="0">No</option>
+                        <option selected value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button-group margin-top-10">
+                <button type="submit" id="modelFormButton" class="btn-primary">Add Model</button>
+                <button type="button" id="cancelEditButton" class="btn-secondary" style="display: none;" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+        </form>
+
+        <div class="models-container">
+            <ul id="modelsList" class="model-list">
+                <!-- models will be loaded here dynamically -->
+            </ul>
+        </div>
+
+        <div class="bottom-controls">
+            <div id="pagination" class="pagination">
+                <button class="btn-secondary" id="firstButton">First</button>
+                <button class="btn-secondary" id="prevButton">Previous</button>
+                <button class="btn-secondary" id="nextButton">Next</button>
+                <button class="btn-secondary" id="lastButton">Last</button>
+            </div>
+            <div id="pageInfo" class="page-info"></div>
+            <div id="feedback" class="feedback"></div>
+        </div>
+
+        <!-- Add this custom dialog HTML -->
+        <div id="deleteConfirmDialog" class="modal">
+            <div class="modal-content">
+                <h2>Confirm Deletion</h2>
+                <p>Are you sure you want to delete this model?</p>
+                <div class="button-group">
+                    <button id="confirmDelete" class="btn-primary">Delete</button>
+                    <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+    <script src="models.js"></script>
+</body>
+</html>

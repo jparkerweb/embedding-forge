@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embedding-Forge | Topics</title>
+  <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+<!--nav-->
+
+<div class="main-content">
+    <div class="section">
+        <h1 class="flex-row-left color-topics">
+            <img class="height-40 margin-right-10" src="img/crystal-topic.png">
+            Topics
+        </h1>
+        <form id="topicForm" class="form-section">
+            <div class="flex-row">
+                <div class="margin-right-20">
+                    <label for="topicName">Topic Name</label>
+                    <input type="text" id="topicName" name="topic" />
+                </div>
+            </div>
+            <div class="button-group margin-top-10">
+                <button type="submit" id="topicFormButton" class="btn-primary">Add Topic</button>
+                <button type="button" id="cancelEditButton" class="btn-secondary" style="display: none;" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+        </form>
+
+        <div class="topics-container">
+            <ul id="topicsList" class="topic-list">
+                <!-- topics will be loaded here dynamically -->
+            </ul>
+        </div>
+
+        <div class="bottom-controls">
+            <div id="pagination" class="pagination">
+                <button class="btn-secondary" id="firstButton">First</button>
+                <button class="btn-secondary" id="prevButton">Previous</button>
+                <button class="btn-secondary" id="nextButton">Next</button>
+                <button class="btn-secondary" id="lastButton">Last</button>
+            </div>
+            <div id="pageInfo" class="page-info"></div>
+            <div id="feedback" class="feedback"></div>
+        </div>
+
+        <!-- Add this custom dialog HTML -->
+        <div id="deleteConfirmDialog" class="modal">
+            <div class="modal-content">
+                <h2>Confirm Deletion</h2>
+                <p>Are you sure you want to delete this topic?</p>
+                <div class="button-group">
+                    <button id="confirmDelete" class="btn-primary">Delete</button>
+                    <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+    <script src="topics.js"></script>
+</body>
+</html>

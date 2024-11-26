@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedding-Forge | Phrases</title>
+    <link rel="stylesheet" href="style/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!--nav-->
+    <div class="main-content">
+        <div class="section">
+            <h1 class="flex-row-left color-phrases">
+                <img class="height-40 margin-right-10" src="img/crystal-phrase.png">
+                Phrases
+            </h1>
+            <form id="phraseForm" class="form-section">
+                <div class="flex-row">
+                    <div class="margin-right-20 flex-1">
+                        <label for="phraseText">Phrase</label>
+                        <input type="text" id="phraseText" name="phrase" required />
+                    </div>
+                    <div class="flex-1">
+                        <label for="topicTags">Topics</label>
+                        <input type="text" id="topicTags" name="topics" />
+                    </div>
+                </div>
+                <div class="button-group margin-top-10">
+                    <button type="submit" id="phraseFormButton" class="btn-primary">Add Phrase</button>
+                    <button type="button" id="cancelEditButton" class="btn-secondary" style="display: none;">Cancel Edit</button>
+                </div>
+            </form>
+
+            <div class="phrases-container">
+                <ul id="phrasesList" class="phrase-list">
+                    <!-- phrases will be loaded here dynamically -->
+                </ul>
+            </div>
+
+            <div class="bottom-controls">
+                <div id="pagination" class="pagination">
+                    <button class="btn-secondary" id="firstButton">First</button>
+                    <button class="btn-secondary" id="prevButton">Previous</button>
+                    <button class="btn-secondary" id="nextButton">Next</button>
+                    <button class="btn-secondary" id="lastButton">Last</button>
+                </div>
+                <div id="pageInfo" class="page-info"></div>
+                <div id="feedback" class="feedback"></div>
+            </div>
+
+            <div id="deleteConfirmDialog" class="modal">
+                <div class="modal-content">
+                    <h2>Confirm Deletion</h2>
+                    <p>Are you sure you want to delete this phrase?</p>
+                    <div class="button-group">
+                        <button id="confirmDelete" class="btn-primary">Delete</button>
+                        <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="phrases.js"></script>
+</body>
+</html>

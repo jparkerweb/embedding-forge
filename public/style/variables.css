@@ -1,0 +1,16 @@
+/*************/
+/* variables */
+/*************/
+:root {
+	--color-primary: #1a97bc;
+	--color-secondary: #1a7bbc;
+	--color-tertiary: #78a7cc;
+	--color-light: #f4f4f4;
+	--color-dark: #333;
+    --color-error: #ff0000;
+    --color-success: #008000;
+    --color-warning: #ff7c00;
+    --color-info: #00C0FA;
+
+	--color-models: #616CB1;
+}
