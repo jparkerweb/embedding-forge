@@ -1,1 +1,1 @@
-# embedding-forge
+# 🔨 Embedding Forge
