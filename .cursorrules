@@ -14,6 +14,7 @@ Naming Conventions:
 JavaScript Usage:
 - Avoid Global Variables: Minimize the use of global variables to prevent unintended side effects where possible.
 - Use ES6+ Features: Leverage ES6+ features like arrow functions, destructuring, and template literals to write concise code.
+- Write all JavaScript in valid JavaScript syntax, no TypeScript.
 
 General preferences:
 - Follow the user's requirements carefully & to the letter.
