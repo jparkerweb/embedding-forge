@@ -21,16 +21,16 @@ document.getElementById('modelForm').addEventListener('submit', function(event) 
 
     const model_name = document.getElementById('modelName').value.trim();
     const huggingface_name = document.getElementById('huggingfaceName').value.trim();
-    const persision = document.getElementById('persision').value;
+    const precision = document.getElementById('precision').value;
     const url = editingModelId ? `/admin/models/${editingModelId}` : '/admin/models';
     const method = editingModelId ? 'PUT' : 'POST';
 
-    if (!persision || !model_name || !huggingface_name) {
+    if (!precision || !model_name || !huggingface_name) {
         setFeedback('all fields are required');
         return;
     }
 
-    const modelData = { model_name, huggingface_name, persision };
+    const modelData = { model_name, huggingface_name, precision };
 
     fetch(url, {
         method: method,
@@ -42,7 +42,7 @@ document.getElementById('modelForm').addEventListener('submit', function(event) 
         setFeedback(data.feedback);
         document.getElementById('modelName').value = '';
         document.getElementById('huggingfaceName').value = '';
-        document.getElementById('persision').selectedIndex = 0;
+        document.getElementById('precision').selectedIndex = 0;
         editingModelId = null; // Reset editing mode
         loadModels(currentPage); // Keep current page when reloading
         cancelEdit(); // Reset form to "add" mode
@@ -54,16 +54,16 @@ function cancelEdit() {
     editingModelId = null;
     document.getElementById('modelName').value = '';
     document.getElementById('huggingfaceName').value = '';
-    document.getElementById('persision').value = 'fp32'; // Or your default type
+    document.getElementById('precision').value = 'fp32'; // Or your default type
     document.getElementById('modelFormButton').textContent = 'Add Model';
     document.getElementById('cancelEditButton').style.display = 'none';
 }
 
-function editModel(model_id, modelName, huggingfaceName, persision) {
+function editModel(model_id, modelName, huggingfaceName, precision) {
     editingModelId = model_id;
     document.getElementById('modelName').value = modelName;
     document.getElementById('huggingfaceName').value = huggingfaceName;
-    document.getElementById('persision').value = persision;
+    document.getElementById('precision').value = precision;
     document.getElementById('modelFormButton').textContent = 'Save Changes';
     document.getElementById('cancelEditButton').style.display = 'inline';
 }
@@ -114,19 +114,19 @@ function loadModels(page = 1) {
 
         data.models.forEach(model => {
             const listItem = document.createElement('li');
-            const persision = model.persision;
+            const precision = model.precision;
             listItem.innerHTML = `
                 <div>
                     <button type="button" class="delete-button btn-secondary" data-modelId="${model.model_id}">Delete</button>
-                    <button type="button" class="edit-button btn-primary" data-modelId="${model.model_id}" data-modelName="${model.model_name}" data-huggingfaceName="${model.huggingface_name}" data-persision="${model.persision}">Edit</button>
+                    <button type="button" class="edit-button btn-primary" data-modelId="${model.model_id}" data-modelName="${model.model_name}" data-huggingfaceName="${model.huggingface_name}" data-precision="${model.precision}">Edit</button>
                 </div>
                 <div>
                     <span>model</span>
                     <div><a href="https://huggingface.co/${model.huggingface_name}" target="model">${model.model_name}</a></div>
                 </div>
                 <div>
-                    <span>persision</span>
-                    <div>${persision}</div>
+                    <span>precision</span>
+                    <div>${precision}</div>
                 </div>
             `;
             modelsList.appendChild(listItem);
@@ -174,8 +174,8 @@ function attachEditButtonEventListeners() {
             const model_id = this.getAttribute('data-modelId');
             const model_name = this.getAttribute('data-modelName');
             const huggingface_name = this.getAttribute('data-huggingfaceName');
-            const persision = this.getAttribute('data-persision');
-            editModel(model_id, model_name, huggingface_name, persision);
+            const precision = this.getAttribute('data-precision');
+            editModel(model_id, model_name, huggingface_name, precision);
         });
     });
 }

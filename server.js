@@ -91,9 +91,9 @@ app.get('/admin/models', async (req, res) => {
 });
 // -- add model --
 app.post('/admin/models', async (req, res) => {
-    const { model_name, huggingface_name, quantized } = req.body;
+    const { model_name, huggingface_name, precision } = req.body;
     try {
-        let feedback = await addModel(model_name, huggingface_name, quantized);
+        let feedback = await addModel(model_name, huggingface_name, precision);
         res.status(200).json({ feedback: feedback });
     } catch (err) {
         res.status(500).json({ error: err });
@@ -102,9 +102,9 @@ app.post('/admin/models', async (req, res) => {
 // -- update model --
 app.put('/admin/models/:model_id', async (req, res) => {
     const { model_id } = req.params;
-    const { model_name, huggingface_name, quantized } = req.body;
+    const { model_name, huggingface_name, precision } = req.body;
     try {
-        const feedback = await updateModel(model_id, model_name, huggingface_name, quantized);
+        const feedback = await updateModel(model_id, model_name, huggingface_name, precision);
         res.status(200).json({ feedback });
     } catch (err) {
         res.status(500).json({ error: err.message });
