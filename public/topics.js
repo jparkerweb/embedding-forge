@@ -40,7 +40,7 @@ document.getElementById('topicForm').addEventListener('submit', function(event) 
         setFeedback(data.feedback);
         document.getElementById('topicName').value = '';
         editingTopicId = null;
-        loadTopics();
+        loadTopics(currentPage);
         cancelEdit();
     })
     .catch(error => console.error('Error:', error));
@@ -76,7 +76,7 @@ function deleteTopic(topic_id) {
         .then(data => {
             if(data.error) { throw new Error(data.error); }
             setFeedback(`Topic deleted: ${topic_id}`);
-            loadTopics();
+            loadTopics(currentPage);
         })
         .catch(error => {
             console.error('Error:', error);
