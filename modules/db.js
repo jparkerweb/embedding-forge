@@ -21,7 +21,7 @@ const initializeDatabase = () => {
                     "model_id" INTEGER NOT NULL UNIQUE,
                     "model_name" VARCHAR,
                     "huggingface_name" VARCHAR,
-                    "quantized" BOOLEAN DEFAULT true,
+                    "persision" VARCHAR DEFAULT "fp32",
                     PRIMARY KEY("model_id"),
                     FOREIGN KEY ("model_id") REFERENCES "calculated_topics"("model_id")
                     ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -105,8 +105,8 @@ const initializeDatabase = () => {
                         // Use serialize to ensure that database operations are executed in sequence
                         db.serialize(() => {
                             seedEmbeddingModels.forEach((model) => {
-                                const insert = 'INSERT INTO models (model_name, huggingface_name, quantized) VALUES (?, ?, ?)';
-                                db.run(insert, [model.model, model.huggingFaceName, model.quantized], function(err) {
+                                const insert = 'INSERT INTO models (model_name, huggingface_name, persision) VALUES (?, ?, ?)';
+                                db.run(insert, [model.model, model.huggingFaceName, model.per], function(err) {
                                     if (err) {
                                         console.error("Error inserting into models table", err);
                                     } else {
@@ -171,10 +171,10 @@ export function listModels(page = 1, limit = 10) {
 // -----------------------------------------
 // -- add a new model to the models table --
 // -----------------------------------------
-export function addModel(model_name, huggingface_name, quantized) {
+export function addModel(model_name, huggingface_name, persision) {
     return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO models (model_name, huggingface_name, quantized) VALUES (?, ?, ?)';
-        db.run(sql, [model_name, huggingface_name, quantized], function(err) {
+        const sql = 'INSERT INTO models (model_name, huggingface_name, persision) VALUES (?, ?, ?)';
+        db.run(sql, [model_name, huggingface_name, persision], function(err) {
             if (err) {
                 reject(err.message);
             } else {
@@ -186,10 +186,10 @@ export function addModel(model_name, huggingface_name, quantized) {
 // ----------------------------------------
 // -- update a model in the models table --
 // ----------------------------------------
-export function updateModel(model_id, model_name, huggingface_name, quantized) {
+export function updateModel(model_id, model_name, huggingface_name, persision) {
     return new Promise((resolve, reject) => {
-        const sql = 'UPDATE models SET model_name = ?, huggingface_name = ?, quantized = ? WHERE model_id = ?';
-        db.run(sql, [model_name, huggingface_name, quantized, model_id], function(err) {
+        const sql = 'UPDATE models SET model_name = ?, huggingface_name = ?, persision = ? WHERE model_id = ?';
+        db.run(sql, [model_name, huggingface_name, persision, model_id], function(err) {
             if (err) {
                 reject(err.message);
             } else {
