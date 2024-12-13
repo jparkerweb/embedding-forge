@@ -21,16 +21,16 @@ document.getElementById('modelForm').addEventListener('submit', function(event) 
 
     const model_name = document.getElementById('modelName').value.trim();
     const huggingface_name = document.getElementById('huggingfaceName').value.trim();
-    const quantized = document.getElementById('quantized').value;
+    const persision = document.getElementById('persision').value;
     const url = editingModelId ? `/admin/models/${editingModelId}` : '/admin/models';
     const method = editingModelId ? 'PUT' : 'POST';
 
-    if (!quantized || !model_name || !huggingface_name) {
+    if (!persision || !model_name || !huggingface_name) {
         setFeedback('all fields are required');
         return;
     }
 
-    const modelData = { model_name, huggingface_name, quantized };
+    const modelData = { model_name, huggingface_name, persision };
 
     fetch(url, {
         method: method,
@@ -42,9 +42,9 @@ document.getElementById('modelForm').addEventListener('submit', function(event) 
         setFeedback(data.feedback);
         document.getElementById('modelName').value = '';
         document.getElementById('huggingfaceName').value = '';
-        document.getElementById('quantized').selectedIndex = 0;
+        document.getElementById('persision').selectedIndex = 0;
         editingModelId = null; // Reset editing mode
-        loadModels(); // Reload the list
+        loadModels(currentPage); // Keep current page when reloading
         cancelEdit(); // Reset form to "add" mode
     })
     .catch(error => console.error('Error:', error));
@@ -54,16 +54,16 @@ function cancelEdit() {
     editingModelId = null;
     document.getElementById('modelName').value = '';
     document.getElementById('huggingfaceName').value = '';
-    document.getElementById('quantized').value = '1'; // Or your default type
+    document.getElementById('persision').value = 'fp32'; // Or your default type
     document.getElementById('modelFormButton').textContent = 'Add Model';
     document.getElementById('cancelEditButton').style.display = 'none';
 }
 
-function editModel(model_id, modelName, huggingfaceName, quantized) {
+function editModel(model_id, modelName, huggingfaceName, persision) {
     editingModelId = model_id;
     document.getElementById('modelName').value = modelName;
     document.getElementById('huggingfaceName').value = huggingfaceName;
-    document.getElementById('quantized').value = quantized;
+    document.getElementById('persision').value = persision;
     document.getElementById('modelFormButton').textContent = 'Save Changes';
     document.getElementById('cancelEditButton').style.display = 'inline';
 }
@@ -84,7 +84,7 @@ function deleteModel(model_id) {
         .then(data => {
             if(data.error) { throw new Error(data.error); }
             setFeedback(`Model deleted: ${model_id}`);
-            loadModels();  // Reload the models after deletion
+            loadModels(currentPage);  // Reload the models after deletion
         })
         .catch(error => {
             console.error('Error:', error);
@@ -114,19 +114,19 @@ function loadModels(page = 1) {
 
         data.models.forEach(model => {
             const listItem = document.createElement('li');
-            const quantized = model.quantized ? 'yes' : 'no';
+            const persision = model.persision;
             listItem.innerHTML = `
                 <div>
                     <button type="button" class="delete-button btn-secondary" data-modelId="${model.model_id}">Delete</button>
-                    <button type="button" class="edit-button btn-primary" data-modelId="${model.model_id}" data-modelName="${model.model_name}" data-huggingfaceName="${model.huggingface_name}" data-quantized="${model.quantized}">Edit</button>
+                    <button type="button" class="edit-button btn-primary" data-modelId="${model.model_id}" data-modelName="${model.model_name}" data-huggingfaceName="${model.huggingface_name}" data-persision="${model.persision}">Edit</button>
                 </div>
                 <div>
                     <span>model</span>
                     <div><a href="https://huggingface.co/${model.huggingface_name}" target="model">${model.model_name}</a></div>
                 </div>
                 <div>
-                    <span>quantized</span>
-                    <div>${quantized}</div>
+                    <span>persision</span>
+                    <div>${persision}</div>
                 </div>
             `;
             modelsList.appendChild(listItem);
@@ -174,8 +174,8 @@ function attachEditButtonEventListeners() {
             const model_id = this.getAttribute('data-modelId');
             const model_name = this.getAttribute('data-modelName');
             const huggingface_name = this.getAttribute('data-huggingfaceName');
-            const quantized = this.getAttribute('data-quantized');
-            editModel(model_id, model_name, huggingface_name, quantized);
+            const persision = this.getAttribute('data-persision');
+            editModel(model_id, model_name, huggingface_name, persision);
         });
     });
 }
